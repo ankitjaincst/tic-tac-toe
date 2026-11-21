@@ -16,50 +16,89 @@
     <div class="page">
       <header class="header">
         <p class="brand">Tic-Tac-Toe</p>
-        <p id="game-label" class="game-label">Game 1</p>
-        <p id="status" class="status" aria-live="polite">Turn of Player One (X)</p>
       </header>
 
-      <main class="board-wrap">
-        <div
-          id="board"
-          class="board"
-          role="grid"
-          aria-label="Tic-tac-toe board"
-        >
-          <button class="cell" data-index="0" role="gridcell" aria-label="Cell 1"></button>
-          <button class="cell" data-index="1" role="gridcell" aria-label="Cell 2"></button>
-          <button class="cell" data-index="2" role="gridcell" aria-label="Cell 3"></button>
-          <button class="cell" data-index="3" role="gridcell" aria-label="Cell 4"></button>
-          <button class="cell" data-index="4" role="gridcell" aria-label="Cell 5"></button>
-          <button class="cell" data-index="5" role="gridcell" aria-label="Cell 6"></button>
-          <button class="cell" data-index="6" role="gridcell" aria-label="Cell 7"></button>
-          <button class="cell" data-index="7" role="gridcell" aria-label="Cell 8"></button>
-          <button class="cell" data-index="8" role="gridcell" aria-label="Cell 9"></button>
-        </div>
-      </main>
+      <section id="setup" class="setup" aria-label="Player setup">
+        <form id="setup-form" class="setup-form" novalidate>
+          <label class="field">
+            <span class="field-label">Player One (X)</span>
+            <input
+              id="name-one"
+              class="field-input"
+              type="text"
+              name="playerOne"
+              autocomplete="nickname"
+              maxlength="24"
+              required
+            />
+          </label>
 
-      <footer class="players">
-        <div class="player player-x" id="player-one">
-          <span class="player-mark">X</span>
-          <div class="player-meta">
-            <span class="player-name">Player One</span>
-            <span class="player-score" id="score-one">0</span>
-          </div>
-        </div>
-        <div class="player player-o" id="player-two">
-          <span class="player-mark">O</span>
-          <div class="player-meta">
-            <span class="player-name">Player Two</span>
-            <span class="player-score" id="score-two">0</span>
-          </div>
-        </div>
-      </footer>
+          <label class="field">
+            <span class="field-label">Player Two (O)</span>
+            <input
+              id="name-two"
+              class="field-input"
+              type="text"
+              name="playerTwo"
+              autocomplete="nickname"
+              maxlength="24"
+              required
+            />
+          </label>
 
-      <div class="actions">
-        <button id="next-game" class="next-game" type="button" hidden>
-          Next game
-        </button>
+          <p id="setup-error" class="setup-error" role="alert" hidden></p>
+
+          <button class="start-game" type="submit">Start game</button>
+        </form>
+      </section>
+
+      <div id="game" class="game" hidden>
+        <div class="game-header">
+          <p id="game-label" class="game-label">Game 1</p>
+          <p id="status" class="status" aria-live="polite">Turn of Player One (X)</p>
+        </div>
+
+        <main class="board-wrap">
+          <div
+            id="board"
+            class="board"
+            role="grid"
+            aria-label="Tic-tac-toe board"
+          >
+            <button class="cell" data-index="0" role="gridcell" aria-label="Cell 1"></button>
+            <button class="cell" data-index="1" role="gridcell" aria-label="Cell 2"></button>
+            <button class="cell" data-index="2" role="gridcell" aria-label="Cell 3"></button>
+            <button class="cell" data-index="3" role="gridcell" aria-label="Cell 4"></button>
+            <button class="cell" data-index="4" role="gridcell" aria-label="Cell 5"></button>
+            <button class="cell" data-index="5" role="gridcell" aria-label="Cell 6"></button>
+            <button class="cell" data-index="6" role="gridcell" aria-label="Cell 7"></button>
+            <button class="cell" data-index="7" role="gridcell" aria-label="Cell 8"></button>
+            <button class="cell" data-index="8" role="gridcell" aria-label="Cell 9"></button>
+          </div>
+        </main>
+
+        <footer class="players">
+          <div class="player player-x" id="player-one">
+            <span class="player-mark">X</span>
+            <div class="player-meta">
+              <span class="player-name" id="label-one">Player One</span>
+              <span class="player-score" id="score-one">0</span>
+            </div>
+          </div>
+          <div class="player player-o" id="player-two">
+            <span class="player-mark">O</span>
+            <div class="player-meta">
+              <span class="player-name" id="label-two">Player Two</span>
+              <span class="player-score" id="score-two">0</span>
+            </div>
+          </div>
+        </footer>
+
+        <div class="actions">
+          <button id="next-game" class="next-game" type="button" hidden>
+            Next game
+          </button>
+        </div>
       </div>
     </div>
 

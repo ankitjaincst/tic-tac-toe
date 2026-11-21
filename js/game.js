@@ -1,4 +1,4 @@
-import { PLAYERS, WIN_LINES } from "./constants.js";
+import { PLAYER_ONE, PLAYER_TWO, WIN_LINES } from "./constants.js";
 
 export function createGame() {
   let board = Array(9).fill(null);
@@ -8,12 +8,20 @@ export function createGame() {
   let winningLine = null;
   let isDraw = false;
   const scores = { X: 0, O: 0 };
+  const players = {
+    X: { ...PLAYER_ONE },
+    O: { ...PLAYER_TWO },
+  };
 
   function getState() {
     return {
       board: [...board],
       currentMark,
-      currentPlayer: PLAYERS[currentMark],
+      currentPlayer: players[currentMark],
+      players: {
+        X: { ...players.X },
+        O: { ...players.O },
+      },
       gameNumber,
       winner,
       winningLine: winningLine ? [...winningLine] : null,
@@ -21,6 +29,12 @@ export function createGame() {
       isOver: Boolean(winner) || isDraw,
       scores: { ...scores },
     };
+  }
+
+  function setPlayerNames(nameOne, nameTwo) {
+    players.X.name = nameOne;
+    players.O.name = nameTwo;
+    return getState();
   }
 
   function findWinner(nextBoard) {
@@ -45,7 +59,7 @@ export function createGame() {
 
     const result = findWinner(board);
     if (result) {
-      winner = PLAYERS[result.mark];
+      winner = players[result.mark];
       winningLine = result.line;
       scores[result.mark] += 1;
       return { ok: true, state: getState() };
@@ -72,6 +86,7 @@ export function createGame() {
 
   return {
     getState,
+    setPlayerNames,
     play,
     nextGame,
   };

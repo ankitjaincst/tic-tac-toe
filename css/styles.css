@@ -478,6 +478,7 @@ body {
   --board-shadow: rgba(0, 0, 0, 0.5);
   --glow-x: rgba(61, 220, 151, 0.08);
   --glow-o: rgba(255, 154, 92, 0.08);
+  --celebration-bg: #18212c;
 }
 
 .theme-toggle {

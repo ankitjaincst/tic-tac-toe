@@ -683,3 +683,55 @@ body {
   }
 }
 /* ===== End celebration overlay ===== */
+
+/* ===== Bouncing ball (bottom of page) ===== */
+.bounce-track {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 90px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Moves left to right, then starts again from the left. */
+.bounce-x {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  animation: ball-forward 6s linear infinite;
+}
+
+/* Simple up and down bounce (about 4 bounces per pass). */
+.bounce-ball {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #000;
+  animation: ball-bounce 0.75s infinite;
+}
+
+/* Black ball is invisible on the dark background, so use a light one there. */
+:root[data-theme="dark"] .bounce-ball {
+  background: #e8edf3;
+}
+
+@keyframes ball-forward {
+  from { transform: translateX(-40px); }
+  to { transform: translateX(100vw); }
+}
+
+@keyframes ball-bounce {
+  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1); }
+  50% { transform: translateY(-60px); animation-timing-function: cubic-bezier(0.6, 0, 0.8, 0.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bounce-x,
+  .bounce-ball {
+    animation: none;
+  }
+}
+/* ===== End bouncing ball ===== */

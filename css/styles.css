@@ -478,6 +478,7 @@ body {
   --board-shadow: rgba(0, 0, 0, 0.5);
   --glow-x: rgba(61, 220, 151, 0.08);
   --glow-o: rgba(255, 154, 92, 0.08);
+  --celebration-bg: #18212c;
 }
 
 .theme-toggle {
@@ -530,3 +531,155 @@ body {
   outline-offset: 3px;
 }
 /* ===== End theme toggle ===== */
+
+/* ===== Celebration overlay (win / draw) ===== */
+.celebration {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(10, 16, 26, 0.55);
+  backdrop-filter: blur(3px);
+  animation: celebration-fade 0.25s ease-out;
+}
+
+.celebration[hidden] {
+  display: none;
+}
+
+.celebration-confetti {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.celebration-dialog {
+  position: relative;
+  width: min(92vw, 380px);
+  padding: 2rem 1.5rem 1.5rem;
+  border-radius: 1.25rem;
+  text-align: center;
+  color: var(--ink);
+  background: var(--celebration-bg, #ffffff);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  animation: celebration-pop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+.celebration.is-win .celebration-dialog {
+  border: 3px solid var(--x);
+}
+
+.celebration.is-draw .celebration-dialog {
+  border: 3px solid var(--muted);
+}
+
+.celebration-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.celebration.is-win .celebration-emoji {
+  animation: celebration-bounce 0.9s ease-in-out infinite;
+}
+
+.celebration.is-draw .celebration-emoji {
+  animation: celebration-sway 2.4s ease-in-out infinite;
+}
+
+.celebration-title {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.celebration.is-win .celebration-title {
+  color: var(--x);
+}
+
+.celebration-sub {
+  margin: 0;
+  color: var(--muted);
+}
+
+.celebration-next {
+  margin-top: 0.5rem;
+  padding: 0.7rem 1.6rem;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--x);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.celebration-mute {
+  padding: 0.25rem 0.75rem;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.celebration-mute:hover {
+  border-color: var(--muted);
+}
+
+.celebration-close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.6rem;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.celebration button:focus-visible {
+  outline: 3px solid var(--o);
+  outline-offset: 2px;
+}
+
+@keyframes celebration-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes celebration-pop {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes celebration-bounce {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-10px) rotate(6deg); }
+}
+
+@keyframes celebration-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .celebration,
+  .celebration-dialog,
+  .celebration-emoji {
+    animation: none !important;
+  }
+}
+/* ===== End celebration overlay ===== */

@@ -118,6 +118,25 @@
       </div>
     </div>
 
+    <!-- Celebration overlay (win / draw) -->
+    <div id="celebration" class="celebration" hidden>
+      <canvas id="celebration-confetti" class="celebration-confetti" aria-hidden="true"></canvas>
+      <div
+        class="celebration-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="celebration-title"
+        aria-describedby="celebration-sub"
+      >
+        <button id="celebration-close" class="celebration-close" type="button" aria-label="Close">×</button>
+        <div id="celebration-emoji" class="celebration-emoji" aria-hidden="true">🎉</div>
+        <h2 id="celebration-title" class="celebration-title" aria-live="assertive"></h2>
+        <p id="celebration-sub" class="celebration-sub"></p>
+        <button id="celebration-next" class="celebration-next" type="button">Next game</button>
+        <button id="celebration-mute" class="celebration-mute" type="button" aria-pressed="false">🔊 Sound on</button>
+      </div>
+    </div>
+
     <script type="module" src="js/app.js"></script>
   </body>
 </html>

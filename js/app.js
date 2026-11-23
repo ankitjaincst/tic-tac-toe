@@ -1,3 +1,4 @@
+import "./theme.js";
 import { createGame } from "./game.js";
 
 const game = createGame();

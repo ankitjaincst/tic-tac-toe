@@ -1,5 +1,6 @@
 import "./theme.js";
 import { createGame } from "./game.js";
+import { initCelebration } from "./celebration.js";
 
 const game = createGame();
 
@@ -112,9 +113,12 @@ boardEl.addEventListener("click", (event) => {
   const result = game.play(index);
   if (result.ok) {
     render(result.state);
+    if (result.state.isOver) celebration.show(result.state);
   }
 });
 
 nextGameBtn.addEventListener("click", () => {
   render(game.nextGame());
 });
+
+const celebration = initCelebration({ onNext: () => nextGameBtn.click() });
